@@ -29,6 +29,12 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
+
+        <service
+            android:name=".TestService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

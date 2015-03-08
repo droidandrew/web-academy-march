@@ -5,22 +5,25 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class NavActivity extends Activity {
     public static final String TAG = "{NavActivity}";
     EditText editText;
     TestService.MyBinder mBinder;
-    Button mButtonStartService;
     ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -43,6 +46,8 @@ public class NavActivity extends Activity {
         public void onServiceDisconnected(ComponentName name) {
         }
     };
+    Button mButtonStartService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,46 @@ public class NavActivity extends Activity {
                  bindService(getServiceIntent() , connection , Service.BIND_AUTO_CREATE);
             }
         });
+
+        editText = (EditText) findViewById(R.id.editText);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG, "New text =  " + s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            int color = getResources().getColor(R.color.red_color);
+            mButtonStartService.setTextColor(color);
+            String strFromRes = getString(R.string.app_name);
+            mButtonStartService.setText(R.string.app_name);
+            mButtonStartService.setBackgroundResource(R.drawable.button1);
+        } else {
+            int color = getResources().getColor(R.color.yellow_color);
+            mButtonStartService.setTextColor(color);
+            String strFromRes = getString(R.string.start_service);
+            mButtonStartService.setText(strFromRes);
+            mButtonStartService.setBackgroundResource(R.drawable.morda);
+        }
+
+
+
     }
 
     private Intent getServiceIntent(){

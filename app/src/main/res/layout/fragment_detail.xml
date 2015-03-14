@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.webacademy.march.app.fragment.DetailFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="24dp"
+        android:textStyle="bold|italic"
+        tools:text="Tittle" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text=" protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test_fragment);
+          isPortret = getResources().getBoolean(R.bool.port);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, new MenuFragment());
+        if (!isPortret) {
+            transaction.replace(R.id.container2, new MenuFragment());
+        }
+        transaction.commit();
+        }" />
+
+</LinearLayout>

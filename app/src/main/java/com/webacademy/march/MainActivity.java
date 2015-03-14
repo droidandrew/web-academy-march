@@ -1,4 +1,4 @@
-package com.webacadwmy.march;
+package com.webacademy.march;
 
 import android.app.Activity;
 import android.os.Bundle;

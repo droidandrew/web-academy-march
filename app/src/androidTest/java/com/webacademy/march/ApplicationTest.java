@@ -1,4 +1,4 @@
-package com.webacadwmy.march;
+package com.webacademy.march;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

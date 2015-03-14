@@ -1,4 +1,4 @@
-package com.webacadwmy.march;
+package com.webacademy.march;
 
 import android.app.Service;
 import android.content.Intent;
@@ -10,6 +10,8 @@ public class TestService extends Service {
 
     public static final String TAG = "{TestService}";
     MyBinder binder = new MyBinder();
+    int mCounter = 0;
+    OnMyServiceListener onMyServiceListener;
 
     public TestService() {
     }
@@ -18,8 +20,6 @@ public class TestService extends Service {
     public IBinder onBind(Intent intent) {
         return binder;
     }
-
-    int mCounter = 0;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -35,16 +35,19 @@ public class TestService extends Service {
                         e.printStackTrace();
                     }
                     if (onMyServiceListener != null) {
-                            onMyServiceListener.onUpdate(mCounter);
-                        }
-                        Log.d(TAG, "Counter = " + i);
+                        onMyServiceListener.onUpdate(mCounter);
+                    }
+                    Log.d(TAG, "Counter = " + i);
                 }
             }
         }).start();
 
 
-
         return 0;
+    }
+
+    public interface OnMyServiceListener {
+        public void onUpdate(int counter);
     }
 
     public class MyBinder extends Binder {
@@ -56,10 +59,4 @@ public class TestService extends Service {
             onMyServiceListener = listener;
         }
     }
-
-    public interface OnMyServiceListener {
-        public void onUpdate(int counter);
-    }
-
-    OnMyServiceListener onMyServiceListener;
 }

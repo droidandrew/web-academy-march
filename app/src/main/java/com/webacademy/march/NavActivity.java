@@ -1,4 +1,4 @@
-package com.webacadwmy.march;
+package com.webacademy.march;
 
 import android.app.Activity;
 import android.app.Service;
@@ -9,16 +9,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 public class NavActivity extends Activity {
     public static final String TAG = "{NavActivity}";
@@ -27,8 +22,8 @@ public class NavActivity extends Activity {
     ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-          mBinder = (TestService.MyBinder) service;
-          mBinder.setOnMyServiceListener(new TestService.OnMyServiceListener() {
+            mBinder = (TestService.MyBinder) service;
+            mBinder.setOnMyServiceListener(new TestService.OnMyServiceListener() {
                 @Override
                 public void onUpdate(final int counter) {
                     runOnUiThread(new Runnable() {
@@ -42,6 +37,7 @@ public class NavActivity extends Activity {
                 }
             });
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
         }
@@ -56,8 +52,8 @@ public class NavActivity extends Activity {
         mButtonStartService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startService(getServiceIntent());
-                 bindService(getServiceIntent() , connection , Service.BIND_AUTO_CREATE);
+                startService(getServiceIntent());
+                bindService(getServiceIntent(), connection, Service.BIND_AUTO_CREATE);
             }
         });
 
@@ -99,10 +95,9 @@ public class NavActivity extends Activity {
         }
 
 
-
     }
 
-    private Intent getServiceIntent(){
-       return new Intent(NavActivity.this , TestService.class);
+    private Intent getServiceIntent() {
+        return new Intent(NavActivity.this, TestService.class);
     }
 }

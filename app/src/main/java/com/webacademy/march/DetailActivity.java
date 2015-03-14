@@ -1,4 +1,4 @@
-package com.webacadwmy.march;
+package com.webacademy.march;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,15 +20,14 @@ public class DetailActivity extends Activity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra(EXTRA_KEY_MSG)) {
-            String  msg = intent.getStringExtra(EXTRA_KEY_MSG);
+        if (intent.hasExtra(EXTRA_KEY_MSG)) {
+            String msg = intent.getStringExtra(EXTRA_KEY_MSG);
             TextView textView = (TextView) findViewById(R.id.text);
             textView.setText(msg);
 
-        }else {
-            Toast.makeText(this,"No data!", Toast.LENGTH_LONG ).show();
+        } else {
+            Toast.makeText(this, "No data!", Toast.LENGTH_LONG).show();
         }
-
 
 
     }

@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.webacademy.march.R;
+import com.webacademy.march.api.DataFactory;
+import com.webacademy.march.api.SimpleItem;
 import com.webacademy.march.app.fragment.DetailFragment;
 import com.webacademy.march.app.fragment.MenuFragment;
+
+import java.util.ArrayList;
 
 
 public class TestFragmentActivity extends Activity implements MenuFragment.OnMenuFragmentListener {
@@ -19,6 +23,8 @@ public class TestFragmentActivity extends Activity implements MenuFragment.OnMen
     boolean isPortret;
     MenuFragment menuFragment;
     FragmentTransaction transaction;
+
+    ArrayList<SimpleItem> items = DataFactory.getDataItems();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,7 @@ public class TestFragmentActivity extends Activity implements MenuFragment.OnMen
         transaction = getFragmentManager().beginTransaction();
 
         if (savedInstanceState == null) {
-            menuFragment = new MenuFragment();
+            menuFragment = MenuFragment.newInstance(items);
             transaction.replace(R.id.container, menuFragment);
         } else {
             if (isPortret) {
@@ -37,7 +43,7 @@ public class TestFragmentActivity extends Activity implements MenuFragment.OnMen
             }
         }
         if (!isPortret) {
-            transaction.replace(R.id.container2, DetailFragment.newInstance("Test", "Test"));
+            transaction.replace(R.id.container2, DetailFragment.newInstance("", ""));
         }
         transaction.commit();
 
@@ -47,7 +53,7 @@ public class TestFragmentActivity extends Activity implements MenuFragment.OnMen
     @Override
     public void onItemClick(int id) {
         transaction = getFragmentManager().beginTransaction();
-        DetailFragment fragment = DetailFragment.newInstance("Test " + id, "Test");
+        DetailFragment fragment = DetailFragment.newInstance(items.get(id - 1).getTitle(), items.get(id - 1).getContent());
         transaction.replace(R.id.container2, fragment);
         if (isPortret) {
             transaction.addToBackStack(null);

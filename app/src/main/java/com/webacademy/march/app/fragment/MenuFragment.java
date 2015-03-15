@@ -7,12 +7,15 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.webacademy.march.R;
 import com.webacademy.march.api.SimpleItem;
+import com.webacademy.march.app.adapter.MenuItemsAdapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,18 +24,28 @@ import java.util.List;
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
 
+    private static final String KEY_ITEMS = "i";
     OnMenuFragmentListener onMenuFragmentListener;
-
-
     List<SimpleItem> items;
 
     public MenuFragment() {
+    }
+
+    public static MenuFragment newInstance(ArrayList<SimpleItem> items) {
+        MenuFragment f = new MenuFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY_ITEMS, items);
+        f.setArguments(bundle);
+        return f;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.onMenuFragmentListener = (OnMenuFragmentListener) activity;
+        if (getArguments() != null) {
+            items = (ArrayList<SimpleItem>) getArguments().getSerializable(KEY_ITEMS);
+        }
     }
 
     @Override
@@ -41,6 +54,20 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
 
+        MenuItemsAdapter adapter = new MenuItemsAdapter(getActivity(), items);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (onMenuFragmentListener != null) {
+                    onMenuFragmentListener.onItemClick(position + 1);
+                }
+
+            }
+        });
+
 
         return rootView;
     }
@@ -48,21 +75,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int itemId = -1;
-        switch (v.getId()) {
-            case R.id.button1:
-                itemId = 1;
-                break;
-            case R.id.button2:
-                itemId = 2;
-                break;
-        }
 
-        if (itemId > 0) {
-            if (onMenuFragmentListener != null) {
-                onMenuFragmentListener.onItemClick(itemId);
-            }
-        }
     }
 
 

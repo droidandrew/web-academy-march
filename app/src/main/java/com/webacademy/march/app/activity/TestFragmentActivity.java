@@ -14,7 +14,7 @@ import com.webacademy.march.app.fragment.DetailFragment;
 import com.webacademy.march.app.fragment.MenuFragment;
 
 
-public class TestFragmentActivity extends Activity {
+public class TestFragmentActivity extends Activity implements MenuFragment.OnMenuFragmentListener {
 
     boolean isPortret;
     MenuFragment menuFragment;
@@ -31,29 +31,28 @@ public class TestFragmentActivity extends Activity {
         if (savedInstanceState == null) {
             menuFragment = new MenuFragment();
             transaction.replace(R.id.container, menuFragment);
-
         } else {
             if (isPortret) {
                 transaction.remove(getFragmentManager().findFragmentById(R.id.container2));
             }
         }
-
         if (!isPortret) {
             transaction.replace(R.id.container2, DetailFragment.newInstance("Test", "Test"));
         }
-
         transaction.commit();
 
-        ((MenuFragment) getFragmentManager().findFragmentById(R.id.container)).setOnMenuFragmentListener(new MenuFragment.OnMenuFragmentListener() {
-            @Override
-            public void onItemClick(int id) {
-                transaction = getFragmentManager().beginTransaction();
-                DetailFragment fragment = DetailFragment.newInstance("Test " + id, "Test");
-                transaction.replace(R.id.container2, fragment);
-                transaction.commit();
-            }
-        });
 
+    }
+
+    @Override
+    public void onItemClick(int id) {
+        transaction = getFragmentManager().beginTransaction();
+        DetailFragment fragment = DetailFragment.newInstance("Test " + id, "Test");
+        transaction.replace(R.id.container2, fragment);
+        if (isPortret) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 
 

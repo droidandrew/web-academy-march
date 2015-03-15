@@ -1,6 +1,7 @@
 package com.webacademy.march.app.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.webacademy.march.R;
+
+import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +25,14 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.onMenuFragmentListener = (OnMenuFragmentListener) activity;
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
@@ -33,9 +44,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    public void setOnMenuFragmentListener(OnMenuFragmentListener onMenuFragmentListener) {
-        this.onMenuFragmentListener = onMenuFragmentListener;
-    }
 
     @Override
     public void onClick(View v) {
@@ -56,7 +64,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public interface OnMenuFragmentListener {
+
+
+    public interface OnMenuFragmentListener extends Serializable{
 
         public void onItemClick(int id);
 

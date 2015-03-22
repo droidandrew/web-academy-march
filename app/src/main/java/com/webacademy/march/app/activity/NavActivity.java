@@ -1,4 +1,4 @@
-package com.webacademy.march;
+package com.webacademy.march.app.activity;
 
 import android.app.Activity;
 import android.app.Service;
@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.webacademy.march.R;
+import com.webacademy.march.TestService;
 
 public class NavActivity extends Activity {
     public static final String TAG = "{NavActivity}";

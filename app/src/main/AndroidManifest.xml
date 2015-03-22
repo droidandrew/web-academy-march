@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.webacademy.march.MainActivity"
+            android:name=".app.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.webacademy.march.NavActivity"
+            android:name=".app.activity.NavActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_nav">
             <intent-filter>
@@ -30,16 +30,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.webacademy.march.DetailActivity"
+            android:name=".app.activity.DetailActivity"
             android:label="@string/title_activity_detail" />
 
         <service
-            android:name="com.webacademy.march.TestService"
+            android:name=".TestService"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name="com.webacademy.march.app.activity.TestFragmentActivity"
+            android:name=".app.activity.TestFragmentActivity"
             android:label="@string/title_activity_test_fragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,11 +47,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".FilesActivity"
+            android:name=".app.activity.FilesActivity"
             android:label="FILES" />
-
+        <activity
+            android:name=".app.activity.DBActivity"
+            android:label="@string/title_activity_db"></activity>
     </application>
 
 </manifest>

@@ -1,24 +1,44 @@
-package com.webacademy.march;
+package com.webacademy.march.app.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.webacademy.march.R;
 
 
-public class MainActivity extends Activity {
+public class DetailActivity extends Activity {
+
+    public static final String EXTRA_KEY_MSG = "msg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detail);
+
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_KEY_MSG)) {
+            String msg = intent.getStringExtra(EXTRA_KEY_MSG);
+            TextView textView = (TextView) findViewById(R.id.text);
+            textView.setText(msg);
+
+        } else {
+            Toast.makeText(this, "No data!", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 

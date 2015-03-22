@@ -1,4 +1,4 @@
-package com.webacademy.march;
+package com.webacademy.march.app.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.webacademy.march.R;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

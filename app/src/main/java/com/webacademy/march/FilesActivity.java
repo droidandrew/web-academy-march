@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 
 /**
  * Created by student on 3/21/15.
@@ -38,6 +41,8 @@ public class FilesActivity extends Activity implements View.OnClickListener {
         textView = (TextView) findViewById(R.id.text);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
+
+        findViewById(R.id.button2).setOnClickListener(this);
 
         aSwitch = (Switch) findViewById(R.id.switch_a);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -69,6 +74,23 @@ public class FilesActivity extends Activity implements View.OnClickListener {
 
                 break;
 
+            case R.id.button2:
+                File file = new File(Environment.getExternalStorageDirectory(), "test.txt");
+                try {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    PrintWriter printWriter = new PrintWriter(file);
+                    try {
+                        printWriter.write("Text string test");
+                    } finally {
+                        printWriter.close();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
 

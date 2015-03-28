@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,11 +17,14 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webacademy.march.R;
 import com.webacademy.march.app.adapter.UsersCursorAdapter;
 import com.webacademy.march.app.db.DBHelper;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DBActivity extends Activity {
 
@@ -28,17 +32,11 @@ public class DBActivity extends Activity {
     EditText etName;
     EditText etAge;
     Button bAdd;
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (bAdd != null) {
-                bAdd.setText(" Counter = " + msg.obj);
-            }
-        }
-    };
+
     ListView listView;
     UsersCursorAdapter usersCursorAdapter;
+
+    CounterAsyncTask asyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,34 +50,23 @@ public class DBActivity extends Activity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (asyncTask != null) {
+                    asyncTask.setCancel();
+                    asyncTask = null;
+                    return;
+                }
+
                 String stName = etName.getText().toString();
                 String stAge = etAge.getText().toString();
                 addRow(stName, stAge);
 
-            }
-        });
-
-        Log.d(TAG, "Launch Current thread = " + Thread.currentThread());
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int a = 0;
-                while (a++ < 100) {
-                    try {
-                        Thread.sleep(500L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d(TAG, "Counter = " + a + " Current thread = " + Thread.currentThread());
-                    Message message = new Message();
-                    message.obj = a;
-                    handler.sendMessage(message);
-                }
+                asyncTask = new CounterAsyncTask(bAdd);
+                asyncTask.execute(59);
 
             }
         });
-        thread.start();
+
     }
 
     private void addRow(String stName, String stAge) {
@@ -115,6 +102,66 @@ public class DBActivity extends Activity {
         return database.query(DBHelper.UserTable.TABLE, null, null, null, null, null, null);
     }
 
+    class CounterAsyncTask extends AsyncTask<Integer, Integer, String> {
+
+        AtomicBoolean isCancel = new AtomicBoolean(false);
+
+        TextView v;
+
+        public CounterAsyncTask(TextView v) {
+            this.v = v;
+        }
+
+        public void setCancel() {
+            isCancel = new AtomicBoolean(true);
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            v.setText("Ready to start");
+
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            int i = params[0];
+            while (i++ < 100) {
+
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(i);
+                if (isCancel.get()) {
+                    return "Canceled";
+                }
+            }
+
+            return "Counter complete";
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+            v.setText("Counter = " + values[0]);
+
+            addRow("Name  " + values[0], values[0].toString());
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            v.setText(s);
+
+        }
+    }
 
 
 }

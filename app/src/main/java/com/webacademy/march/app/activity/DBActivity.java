@@ -2,6 +2,7 @@ package com.webacademy.march.app.activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -20,6 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.webacademy.march.MyApp;
+import com.webacademy.march.MyIntentService;
 import com.webacademy.march.R;
 import com.webacademy.march.app.adapter.UsersCursorAdapter;
 import com.webacademy.march.app.db.DBHelper;
@@ -51,18 +54,24 @@ public class DBActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (asyncTask != null) {
-                    asyncTask.setCancel();
-                    asyncTask = null;
-                    return;
-                }
 
                 String stName = etName.getText().toString();
                 String stAge = etAge.getText().toString();
                 addRow(stName, stAge);
 
-                asyncTask = new CounterAsyncTask(bAdd);
-                asyncTask.execute(59);
+                ((MyApp) getApplication()).setOnServiceHelperListener(new MyApp.OnServiceHelperListener() {
+                    @Override
+                    public void onDataUpdate(final int counter) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                bAdd.setText("Counter from service = " + counter);
+                            }
+                        });
+                    }
+                });
+
+                startService(new Intent(getApplicationContext(), MyIntentService.class));
 
             }
         });

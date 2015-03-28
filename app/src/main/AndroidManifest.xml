@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -52,7 +53,11 @@
             android:label="FILES" />
         <activity
             android:name=".app.activity.DBActivity"
-            android:label="@string/title_activity_db"></activity>
+            android:label="@string/title_activity_db" />
+
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

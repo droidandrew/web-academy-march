@@ -16,6 +16,7 @@ public class TestService extends Service {
     public TestService() {
     }
 
+
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
@@ -23,6 +24,7 @@ public class TestService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
 
         new Thread(new Runnable() {
             @Override

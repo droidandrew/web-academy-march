@@ -29,16 +29,6 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.schedule(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 1, TimeUnit.SECONDS);
-
-        executorService.shutdown();
-
 
     }
 

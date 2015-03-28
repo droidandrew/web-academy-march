@@ -2,31 +2,25 @@ package com.webacademy.march.app.activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.webacademy.march.MyApp;
-import com.webacademy.march.MyIntentService;
 import com.webacademy.march.R;
 import com.webacademy.march.app.adapter.UsersCursorAdapter;
 import com.webacademy.march.app.db.DBHelper;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DBActivity extends Activity {
@@ -41,6 +35,9 @@ public class DBActivity extends Activity {
 
     CounterAsyncTask asyncTask;
 
+    int counter;
+    ScheduledExecutorService executorService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,28 +47,29 @@ public class DBActivity extends Activity {
         bAdd = (Button) findViewById(R.id.bAdd);
         listView = (ListView) findViewById(R.id.listView);
         initData();
+
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 String stName = etName.getText().toString();
                 String stAge = etAge.getText().toString();
-                addRow(stName, stAge);
+                //  addRow(stName, stAge);
 
-                ((MyApp) getApplication()).setOnServiceHelperListener(new MyApp.OnServiceHelperListener() {
-                    @Override
-                    public void onDataUpdate(final int counter) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                bAdd.setText("Counter from service = " + counter);
-                            }
-                        });
-                    }
-                });
+                if (executorService == null) {
+                    executorService = Executors.newSingleThreadScheduledExecutor();
+                    executorService.scheduleWithFixedDelay(new Runnable() {
+                        @Override
+                        public void run() {
+                            bAdd.setText("Counter " + counter++);
+                        }
+                    }, 0, 1, TimeUnit.SECONDS);
+                } else {
+                    executorService.shutdown();
+                    executorService = null;
+                    bAdd.setText("Shutdown");
+                }
 
-                startService(new Intent(getApplicationContext(), MyIntentService.class));
 
             }
         });

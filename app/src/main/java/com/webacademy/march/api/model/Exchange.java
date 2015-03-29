@@ -45,11 +45,12 @@ public class Exchange implements Serializable {
 
     @Override
     public String toString() {
-        return "Exchange{" +
-                "ccy='" + ccy + '\'' +
-                ", base_ccy='" + base_ccy + '\'' +
-                ", buy=" + buy +
-                ", sale=" + sale +
-                '}';
+        final StringBuffer sb = new StringBuffer("Exchange{");
+        sb.append("ccy='").append(ccy).append('\'');
+        sb.append(", base_ccy='").append(base_ccy).append('\'');
+        sb.append(", buy=").append(buy);
+        sb.append(", sale=").append(sale);
+        sb.append('}');
+        return sb.toString();
     }
 }

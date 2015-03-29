@@ -53,7 +53,13 @@
             android:label="FILES" />
         <activity
             android:name=".app.activity.DBActivity"
-            android:label="@string/title_activity_db" />
+            android:label="@string/title_activity_db">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".MyIntentService"

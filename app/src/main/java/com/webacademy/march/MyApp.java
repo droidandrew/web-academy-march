@@ -35,19 +35,6 @@ public class MyApp extends Application {
         super.onCreate();
 
 
-        API.get().localExchange("", "", 5, new Callback<List<Exchange>>() {
-            @Override
-            public void success(List<Exchange> exchanges, Response response) {
-                Log.d(TAG, "exchanges = " + exchanges);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-
-
     }
 
     public interface OnServiceHelperListener {

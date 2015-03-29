@@ -38,10 +38,18 @@ public class API {
 
     public interface PrivatExchange {
         @GET("/p24api/pubinfo")
-        public List<Exchange> localExchange(@Query("json") String typeJson, @Query("exchange") String ex, @Query("coursid") int coursid);
+        public List<Exchange> localExchange(
+                @Query("json") String typeJson,
+                @Query("exchange") String ex,
+                @Query("coursid") int coursid
+        );
 
         @GET("/p24api/pubinfo")
-        public void localExchange(@Query("json") String typeJson, @Query("exchange") String ex, @Query("coursid") int coursid, Callback<List<Exchange>> callback);
+        public void localExchange(
+                @Query("json") String typeJson,
+                @Query("exchange") String ex,
+                @Query("coursid") int coursid,
+                Callback<List<Exchange>> callback);
     }
 
 

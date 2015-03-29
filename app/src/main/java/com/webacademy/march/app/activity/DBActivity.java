@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,16 +55,22 @@ public class DBActivity extends Activity {
 
                 String stName = etName.getText().toString();
                 String stAge = etAge.getText().toString();
-                //  addRow(stName, stAge);
+                addRow(stName, stAge);
 
                 if (executorService == null) {
                     executorService = Executors.newSingleThreadScheduledExecutor();
                     executorService.scheduleWithFixedDelay(new Runnable() {
                         @Override
                         public void run() {
-                            bAdd.setText("Counter " + counter++);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    bAdd.setText("Counter = " + counter++ + Thread.currentThread());
+                                }
+                            });
+                            Log.d(TAG, "Counter = " + counter + Thread.currentThread());
                         }
-                    }, 0, 1, TimeUnit.SECONDS);
+                    }, 0, 1000, TimeUnit.MILLISECONDS);
                 } else {
                     executorService.shutdown();
                     executorService = null;

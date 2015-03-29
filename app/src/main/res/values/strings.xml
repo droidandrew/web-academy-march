@@ -12,5 +12,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="key_checked">vjhkdfvhsf.jkgvjhds</string>
     <string name="title_activity_db">DBActivity</string>
+    <string name="title_activity_privat_bank">PrivatBankActivity</string>
 
 </resources>

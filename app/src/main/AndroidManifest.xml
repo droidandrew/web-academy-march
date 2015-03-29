@@ -63,7 +63,17 @@
 
         <service
             android:name=".MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity
+            android:name=".app.activity.PrivatBankActivity"
+            android:label="@string/title_activity_privat_bank">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

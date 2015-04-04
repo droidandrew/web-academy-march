@@ -1,6 +1,7 @@
 package com.webacademy.march.app.activity;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,7 +44,18 @@ public class DBActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_db);
+
+        getIntent();
+
+        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         etName = (EditText) findViewById(R.id.etName);
+        etName.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                manager.cancel(0);
+            }
+        }, 1000);
+
         etAge = (EditText) findViewById(R.id.etAge);
         bAdd = (Button) findViewById(R.id.bAdd);
         listView = (ListView) findViewById(R.id.listView);

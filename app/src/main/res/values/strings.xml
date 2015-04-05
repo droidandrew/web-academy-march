@@ -16,5 +16,6 @@
 
     <string name="button_name">This Button</string>
     <string name="title_activity_custom_view">CustomViewActivity</string>
+    <string name="title_activity_web">WebActivity</string>
 
 </resources>

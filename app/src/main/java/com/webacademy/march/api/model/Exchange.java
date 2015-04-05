@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Exchange implements Serializable {
 
+
     //https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5
 
     /**
@@ -53,4 +54,5 @@ public class Exchange implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
 }

@@ -20,6 +20,12 @@ public class MyApp extends Application {
     private static final String TAG = "{MyApp}";
     OnServiceHelperListener onServiceHelperListener;
 
+    public static int getAppId(String bundle) {
+
+        return bundle.hashCode();
+
+    }
+
     public void setOnServiceHelperListener(OnServiceHelperListener onServiceHelperListener) {
         this.onServiceHelperListener = onServiceHelperListener;
     }
@@ -37,7 +43,9 @@ public class MyApp extends Application {
 
     }
 
+
     public interface OnServiceHelperListener {
         public void onDataUpdate(int counter);
     }
+
 }

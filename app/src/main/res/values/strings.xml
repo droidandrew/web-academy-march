@@ -15,5 +15,6 @@
     <string name="title_activity_privat_bank">PrivatBankActivity</string>
 
     <string name="button_name">This Button</string>
+    <string name="title_activity_custom_view">CustomViewActivity</string>
 
 </resources>

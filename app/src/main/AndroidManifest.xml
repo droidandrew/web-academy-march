@@ -102,6 +102,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".app.activity.ServiceControllerActivity"
+            android:label="@string/title_activity_service_controller">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".app.service.TicTacService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

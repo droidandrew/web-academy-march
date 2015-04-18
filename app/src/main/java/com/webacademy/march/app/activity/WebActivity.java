@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class WebActivity extends ActionBarActivity implements Comparable {
+public class WebActivity extends ActionBarActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,5 @@ public class WebActivity extends ActionBarActivity implements Comparable {
 
 
     }
-
 
 }

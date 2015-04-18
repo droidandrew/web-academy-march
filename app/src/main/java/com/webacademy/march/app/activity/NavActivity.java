@@ -94,7 +94,7 @@ public class NavActivity extends Activity {
             mButtonStartService.setTextColor(color);
             String strFromRes = getString(R.string.start_service);
             mButtonStartService.setText(strFromRes);
-            mButtonStartService.setBackgroundResource(R.drawable.morda);
+            mButtonStartService.setBackgroundResource(R.mipmap.ic_launcher);
         }
 
 

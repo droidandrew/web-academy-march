@@ -14,7 +14,7 @@
         <activity
             android:name=".app.activity.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +24,7 @@
             android:name=".app.activity.NavActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_nav">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,7 +42,7 @@
         <activity
             android:name=".app.activity.TestFragmentActivity"
             android:label="@string/title_activity_test_fragment">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -54,7 +54,7 @@
         <activity
             android:name=".app.activity.DBActivity"
             android:label="@string/title_activity_db">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -68,7 +68,7 @@
         <activity
             android:name=".app.activity.PrivatBankActivity"
             android:label="@string/title_activity_privat_bank">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -77,7 +77,7 @@
         <activity
             android:name=".app.activity.NotificationActivity"
             android:label="Notify">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -87,7 +87,7 @@
             android:name=".app.activity.CustomViewActivity"
             android:label="@string/title_activity_custom_view"
             android:theme="@style/Theme.AppCompat.Light">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -96,7 +96,7 @@
         <activity
             android:name=".app.activity.WebActivity"
             android:label="@string/title_activity_web">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -105,7 +105,7 @@
         <activity
             android:name=".app.activity.ServiceControllerActivity"
             android:label="@string/title_activity_service_controller">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -114,7 +114,17 @@
 
         <service
             android:name=".app.service.TicTacService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity
+            android:name=".app.activity.PicassoActivity"
+            android:label="@string/title_activity_picasso">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

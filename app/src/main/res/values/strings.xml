@@ -18,5 +18,6 @@
     <string name="title_activity_custom_view">CustomViewActivity</string>
     <string name="title_activity_web">WebActivity</string>
     <string name="title_activity_service_controller">ServiceControllerActivity</string>
+    <string name="title_activity_picasso">PicassoActivity</string>
 
 </resources>

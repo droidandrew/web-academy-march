@@ -51,7 +51,7 @@ public class TicTacService extends IntentService {
         void onCounterChanged(int counter);
     }
 
-    class MyBinder extends Binder {
+    public class MyBinder extends Binder {
 
         public void setOnServiceChangeListener(OnServiceChangeListener onServiceChangeListener) {
             TicTacService.this.onServiceChangeListener = onServiceChangeListener;

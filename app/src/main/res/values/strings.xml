@@ -18,5 +18,6 @@
     <string name="title_activity_custom_view">CustomViewActivity</string>
     <string name="title_activity_web">WebActivity</string>
     <string name="title_activity_file_chooser">FileChooserActivity</string>
+    <string name="title_activity_download_manager">DownloadManagerActivity</string>
 
 </resources>
